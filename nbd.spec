@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.7
-Release:        2%{dist}
+Release:        3%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -9,7 +9,7 @@ URL:            http://nbd.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nbd/nbd-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-#BuildRequires:  
+BuildRequires:  glib2-devel
 #Requires:       
 
 %description 
@@ -42,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Sat Oct 13 2007 Eric Harrison <eharrison@mesd.k12.or.us> 2.9.7-3
+- add buildrequires
+
 * Sat Oct 13 2007 Eric Harrison <eharrison@mesd.k12.or.us> 2.9.7-2
 - package cleanups
 
