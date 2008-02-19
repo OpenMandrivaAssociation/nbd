@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.7
-Release:        4%{dist}
+Release:        5%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client*
 
 %changelog
+* Mon Feb 18 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 2.9.7-5
+- Autorebuild for GCC 4.3
+
 * Wed Nov 07 2007 Warren Togami <wtogami@redhat.com> 2.9.7-4
 - include nbd-client i386 in x86-64 RPM because initrd images need it
 
