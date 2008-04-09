@@ -1,6 +1,6 @@
 Name:           nbd
-Version:        2.9.7
-Release:        5%{dist}
+Version:        2.9.10
+Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -23,24 +23,9 @@ remote block devices over a TCP/IP network.
 %configure
 make %{?_smp_mflags}
 
-# Include 32bit nbd-client on 64bit hosts because it is needed in client initrd's
-%ifarch x86_64
-  sed -i "s/SIZEOF_UNSIGNED_LONG_INT 8/SIZEOF_UNSIGNED_LONG_INT 4/" config.h
-  export RPM_OPT_FLAGS=${RPM_OPT_FLAGS//-m64/-m32}
-  # <jakub> warren: you can try compiling it with -static-libgcc, the
-  #         binary doesn't seem to be threaded and so unlikely uses 
-  #         pthread_cleanup_push/pop
-  gcc $RPM_OPT_FLAGS -static-libgcc -o nbd-client-32 nbd-client.c;
-%endif
-
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-
-# Include 32bit nbd-client on 64bit hosts because it is needed in client initrd's
-%ifarch x86_64
-  install -m 755 nbd-client-32 $RPM_BUILD_ROOT%{_sbindir}/nbd-client-32
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -50,9 +35,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc README simple_test nbd-tester-client.c cliserv.h
 %{_mandir}/man*/nbd*
 %{_bindir}/nbd-server
-%{_sbindir}/nbd-client*
+%{_sbindir}/nbd-client
 
 %changelog
+* Wed Apr 09 2008 Warren Togami <wtogami@redhat.com> - 2.9.10-1
+- match nbd in kernel-2.6.24+
+- remove 32bit crack from x86_64 that made no sense
+
 * Mon Feb 18 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 2.9.7-5
 - Autorebuild for GCC 4.3
 
