@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.10
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -38,6 +38,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.10-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Wed Apr 09 2008 Warren Togami <wtogami@redhat.com> - 2.9.10-1
 - match nbd in kernel-2.6.24+
 - remove 32bit crack from x86_64 that made no sense
