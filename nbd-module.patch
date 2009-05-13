@@ -1,0 +1,20 @@
+--- nbd-client.c.orig	2009-05-14 00:27:34.000000000 +0200
++++ nbd-client.c	2009-05-14 00:29:28.000000000 +0200
+@@ -232,7 +232,7 @@
+ 	if (strcmp(argv[0], "-d")==0) {
+ 		nbd = open(argv[1], O_RDWR);
+ 		if (nbd < 0)
+-			err("Can not open NBD: %m");
++			err("Cannot open NBD: %m\nPlease ensure the 'nbd' module is loaded.");
+ 		printf("Disconnecting: que, ");
+ 		if (ioctl(nbd, NBD_CLEAR_QUE)< 0)
+ 			err("Ioctl failed: %m\n");
+@@ -276,7 +276,7 @@
+ 	nbddev = argv[0];
+ 	nbd = open(nbddev, O_RDWR);
+ 	if (nbd < 0)
+-	  err("Can not open NBD: %m");
++	  err("Cannot open NBD: %m\nPlease ensure the 'nbd' module is loaded.");
+ 	++argv; --argc; /* skip device */
+ 
+ 	if (argc>3) goto errmsg;
