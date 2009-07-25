@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.12
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -41,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Sat Jul 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.12-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+
 * Wed May 13 2009 Milos Jakubicek <xjakub@fi.muni.cz> - 2.9.12-1
 - Update to 2.9.12 (resolves BZ#454099).
 - Added nbd-module.patch (resolves BZ#496751).
