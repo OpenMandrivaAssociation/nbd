@@ -1,14 +1,12 @@
 Name:           nbd
-Version:        2.9.12
-Release:        2%{dist}
+Version:        2.9.13
+Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
 License:        GPL+
 URL:            http://nbd.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nbd/nbd-%{version}.tar.bz2
-# Sent to nbd-general@lists.sourceforge.net on 14/05/2009
-Patch0:         %{name}-module.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  glib2-devel
@@ -20,7 +18,6 @@ remote block devices over a TCP/IP network.
 
 %prep
 %setup -q
-%patch0 -b .module
 
 %build
 %configure
@@ -41,6 +38,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Thu Aug  6 2009 Milos Jakubicek <xjakub@fi.muni.cz> - 2.9.13-1
+- Update to 2.9.13
+- Dropped nbd-module.patch (merged upstream)
+
 * Sat Jul 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.12-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
