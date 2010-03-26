@@ -1,5 +1,5 @@
 Name:           nbd
-Version:        2.9.13
+Version:        2.9.15
 Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
@@ -10,7 +10,6 @@ Source0:        http://downloads.sourceforge.net/nbd/nbd-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  glib2-devel
-BuildRequires:  /usr/include/gnu/stubs-32.h
 
 %description 
 Tools for the Linux Kernel's network block device, allowing you to use
@@ -38,6 +37,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Fri Mar 26 2010 Miloš Jakubíček <xjakub@fi.muni.cz> - 2.9.15-1
+- Update to 2.9.15
+- Remove file dep on stubs-32.h, doesn't seem to be necessary anymore
+
 * Thu Aug  6 2009 Milos Jakubicek <xjakub@fi.muni.cz> - 2.9.13-1
 - Update to 2.9.13
 - Dropped nbd-module.patch (merged upstream)
