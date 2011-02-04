@@ -1,5 +1,5 @@
 Name:           nbd
-Version:        2.9.15
+Version:        2.9.20
 Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Fri Feb 04 2011 Miloš Jakubíček <xjakub@fi.muni.cz> - 2.9.20-1
+- Update to 2.9.20: fix CVE-2005-3534, BZ#673562
+
 * Fri Mar 26 2010 Miloš Jakubíček <xjakub@fi.muni.cz> - 2.9.15-1
 - Update to 2.9.15
 - Remove file dep on stubs-32.h, doesn't seem to be necessary anymore
