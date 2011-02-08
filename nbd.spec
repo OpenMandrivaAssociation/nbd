@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.20
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/nbd-client
 
 %changelog
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.20-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Fri Feb 04 2011 Miloš Jakubíček <xjakub@fi.muni.cz> - 2.9.20-1
 - Update to 2.9.20: fix CVE-2005-3534, BZ#673562
 
