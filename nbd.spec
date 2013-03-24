@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        2.9.20
-Release:        2%{dist}
+Release:        6%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
