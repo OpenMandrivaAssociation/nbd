@@ -1,12 +1,12 @@
 Name:           nbd
 Version:        2.9.20
-Release:        6%{dist}
+Release:        7%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 Group:          Applications/System
 License:        GPL+
 URL:            http://nbd.sourceforge.net/
-Source0:        nbd-%{version}.tar.gz
+Source0:        http://downloads.sourceforge.net/nbd/nbd-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  glib2-devel
