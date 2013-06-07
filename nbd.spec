@@ -1,13 +1,11 @@
 Name:           nbd
-Version:        2.9.20
-Release:        5%{dist}
+Version:        3.3
+Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
-Group:          Applications/System
 License:        GPL+
 URL:            http://nbd.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nbd/nbd-%{version}.tar.bz2
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  glib2-devel
 
@@ -23,20 +21,21 @@ remote block devices over a TCP/IP network.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,-)
 %doc README simple_test nbd-tester-client.c cliserv.h
 %{_mandir}/man*/nbd*
 %{_bindir}/nbd-server
 %{_sbindir}/nbd-client
+%{_bindir}/nbd-trdump
 
 %changelog
+* Fri Jun  7 2013 Richard W.M. Jones <rjones@redhat.com> - 3.3-1
+- New upstream version 3.3.
+- Modernize the spec file.
+- There is a new program (nbd-trdump).
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.20-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
