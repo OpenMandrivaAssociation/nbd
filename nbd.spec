@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        3.3
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 
 License:        GPL+
@@ -31,6 +31,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_bindir}/nbd-trdump
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Fri Jun  7 2013 Richard W.M. Jones <rjones@redhat.com> - 3.3-1
 - New upstream version 3.3.
 - Modernize the spec file.
