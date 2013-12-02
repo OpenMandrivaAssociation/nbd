@@ -1,11 +1,17 @@
-Name:           nbd
-Version:        3.4
-Release:        1%{dist}
-Summary:        Network Block Device user-space tools (TCP version)
-License:        GPL+
-URL:            http://nbd.sourceforge.net
-Source0:        http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.bz2
-BuildRequires:  glib2-devel
+Name:              nbd
+Version:           3.5
+Release:           1%{dist}
+Summary:           Network Block Device user-space tools (TCP version)
+License:           GPL+
+URL:               http://nbd.sourceforge.net
+Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.bz2
+Source1:           nbd-server.service
+Source2:           nbd-server.sysconfig
+BuildRequires:     glib2-devel
+BuildRequires:     systemd
+Requires(post):    systemd
+Requires(preun):   systemd
+Requires(postun):  systemd
 
 %description 
 Tools for the Linux Kernel's network block device, allowing you to use
@@ -15,20 +21,38 @@ remote block devices over a TCP/IP network.
 %setup -q
 
 %build
-%configure
+%configure --enable-syslog
 make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot}
+install -pm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
+install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
+
+%post
+%systemd_post %{S:1}
+
+%preun
+%systemd_preun %{S:1}
+
+%postun
+%systemd_postun_with_restart %{S:1}
 
 %files
 %doc README simple_test nbd-tester-client.c cliserv.h
-%{_mandir}/man*/nbd*
 %{_bindir}/nbd-server
-%{_sbindir}/nbd-client
 %{_bindir}/nbd-trdump
+%{_mandir}/man*/nbd*
+%{_sbindir}/nbd-client
+%config(noreplace) %{_sysconfdir}/sysconfig/nbd-server
+%{_unitdir}/nbd-server.service
 
 %changelog
+* Mon Dec 02 2013 Christopher Meng <rpm@cicku.me> - 3.5-1
+- Fix incorrect parsing of access control file in nbd-server(CVE-2013-6410).
+- Add systemd support for nbd-server(BZ#877518).
+- Enable logging to syslog.
+
 * Tue Sep 17 2013 Christopher Meng <rpm@cicku.me> - 3.4-1
 - New version.
 
