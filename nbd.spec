@@ -26,7 +26,7 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot}
-install -pm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
+install -pDm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
 install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 
 %post
