@@ -1,10 +1,10 @@
 Name:              nbd
-Version:           3.5
+Version:           3.6
 Release:           1%{dist}
 Summary:           Network Block Device user-space tools (TCP version)
 License:           GPL+
 URL:               http://nbd.sourceforge.net
-Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.bz2
+Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
 Source1:           nbd-server.service
 Source2:           nbd-server.sysconfig
 BuildRequires:     glib2-devel
@@ -21,13 +21,17 @@ remote block devices over a TCP/IP network.
 %setup -q
 
 %build
-%configure --enable-syslog
+%configure --enable-syslog --enable-lfs
 make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot}
 install -pDm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
 install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
+
+%check
+# Unfortunately we need nbd device to test.
+# make check
 
 %post
 %systemd_post %{S:1}
@@ -39,7 +43,7 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %systemd_postun_with_restart %{S:1}
 
 %files
-%doc README simple_test nbd-tester-client.c cliserv.h
+%doc COPYING README
 %{_bindir}/nbd-server
 %{_bindir}/nbd-trdump
 %{_mandir}/man*/nbd*
@@ -48,13 +52,16 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Sat Jan 04 2014 Christopher Meng <rpm@cicku.me> - 3.6-1
+- Update to 3.6
+
 * Mon Dec 02 2013 Christopher Meng <rpm@cicku.me> - 3.5-1
 - Fix incorrect parsing of access control file in nbd-server(CVE-2013-6410).
 - Add systemd support for nbd-server(BZ#877518).
 - Enable logging to syslog.
 
 * Tue Sep 17 2013 Christopher Meng <rpm@cicku.me> - 3.4-1
-- New version.
+- Update to 3.4
 
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
