@@ -43,7 +43,7 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %systemd_postun_with_restart %{S:1}
 
 %files
-%doc COPYING README
+%doc COPYING README*
 %{_bindir}/nbd-server
 %{_bindir}/nbd-trdump
 %{_mandir}/man*/nbd*
