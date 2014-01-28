@@ -1,5 +1,5 @@
 Name:              nbd
-Version:           3.6
+Version:           3.7
 Release:           1%{dist}
 Summary:           Network Block Device user-space tools (TCP version)
 License:           GPL+
@@ -52,6 +52,9 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Mon Jan 27 2014 Christopher Meng <rpm@cicku.me> - 3.7-1
+- Update to 3.7
+
 * Sat Jan 04 2014 Christopher Meng <rpm@cicku.me> - 3.6-1
 - Update to 3.6
 
