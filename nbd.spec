@@ -1,12 +1,13 @@
 Name:              nbd
 Version:           3.7
-Release:           1%{dist}
+Release:           2%{dist}
 Summary:           Network Block Device user-space tools (TCP version)
 License:           GPL+
 URL:               http://nbd.sourceforge.net
 Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
 Source1:           nbd-server.service
 Source2:           nbd-server.sysconfig
+Patch0:            0001-nbd-support-systemd-initrd-kill-protection.patch
 BuildRequires:     glib2-devel
 BuildRequires:     systemd
 Requires(post):    systemd
@@ -19,6 +20,7 @@ remote block devices over a TCP/IP network.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure --enable-syslog --enable-lfs
@@ -52,6 +54,9 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Thu Jan 30 2014 Christopher Meng <rpm@cicku.me> - 3.7-2
+- Patch to support systemd init system in order to avoid kernel panic.
+
 * Mon Jan 27 2014 Christopher Meng <rpm@cicku.me> - 3.7-1
 - Update to 3.7
 
