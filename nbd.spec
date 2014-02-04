@@ -8,6 +8,7 @@ Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{versio
 Source1:           nbd-server.service
 Source2:           nbd-server.sysconfig
 Patch0:            0001-nbd-support-systemd-initrd-kill-protection.patch
+BuildRequires:     docbook-utils
 BuildRequires:     glib2-devel
 BuildRequires:     systemd
 Requires(post):    systemd
