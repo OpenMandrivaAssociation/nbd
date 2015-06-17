@@ -1,6 +1,6 @@
 Name:              nbd
 Version:           3.8
-Release:           3%{dist}
+Release:           4%{dist}
 Summary:           Network Block Device user-space tools (TCP version)
 License:           GPL+
 URL:               http://nbd.sourceforge.net
@@ -53,6 +53,9 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
