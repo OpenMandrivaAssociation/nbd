@@ -2,7 +2,7 @@ Name:           nbd
 Version:        3.11
 Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
-License:        GPL+
+License:        GPLv2
 URL:            http://nbd.sourceforge.net
 Source0:        http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
 Source1:        nbd-server.service
