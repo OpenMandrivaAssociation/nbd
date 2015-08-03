@@ -1,18 +1,18 @@
-Name:              nbd
-Version:           3.8
-Release:           3%{dist}
-Summary:           Network Block Device user-space tools (TCP version)
-License:           GPL+
-URL:               http://nbd.sourceforge.net
-Source0:           http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
-Source1:           nbd-server.service
-Source2:           nbd-server.sysconfig
-BuildRequires:     docbook-utils
-BuildRequires:     glib2-devel
-BuildRequires:     systemd
-Requires(post):    systemd
-Requires(preun):   systemd
-Requires(postun):  systemd
+Name:           nbd
+Version:        3.11
+Release:        1%{dist}
+Summary:        Network Block Device user-space tools (TCP version)
+License:        GPL+
+URL:            http://nbd.sourceforge.net
+Source0:        http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
+Source1:        nbd-server.service
+Source2:        nbd-server.sysconfig
+#BuildRequires:  docbook-utils
+BuildRequires:  glib2-devel
+BuildRequires:  systemd
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
 
 %description 
 Tools for the Linux Kernel's network block device, allowing you to use
@@ -23,16 +23,15 @@ remote block devices over a TCP/IP network.
 
 %build
 %configure --enable-syslog --enable-lfs
-make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 install -pDm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
 install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 
 %check
-# Unfortunately we need nbd device to test.
-# make check
+make check
 
 %post
 %systemd_post %{S:1}
@@ -44,7 +43,8 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %systemd_postun_with_restart %{S:1}
 
 %files
-%doc COPYING README*
+%doc README*
+%license COPYING
 %{_bindir}/nbd-server
 %{_bindir}/nbd-trdump
 %{_mandir}/man*/nbd*
@@ -53,11 +53,8 @@ install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
-* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+* Sat Jul 11 2015 Christopher Meng <rpm@cicku.me> - 3.11-1
+- Update to 3.11
 
 * Fri Mar 21 2014 Christopher Meng <rpm@cicku.me> - 3.8-1
 - Update to 3.8
