@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        3.11
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPL+
 URL:            http://nbd.sourceforge.net
@@ -53,6 +53,9 @@ make check
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Wed Oct 28 2015 Christopher Meng <rpm@cicku.me> - 3.11-2
+- Rebuild for f23.
+
 * Sat Jul 11 2015 Christopher Meng <rpm@cicku.me> - 3.11-1
 - Update to 3.11
 
