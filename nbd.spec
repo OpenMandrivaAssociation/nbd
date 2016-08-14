@@ -1,13 +1,14 @@
 Name:           nbd
-Version:        3.11
-Release:        2%{dist}
+Version:        3.14
+Release:        1%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
 Source0:        http://downloads.sourceforge.net/project/nbd/%{name}/%{version}/%{name}-%{version}.tar.xz
 Source1:        nbd-server.service
 Source2:        nbd-server.sysconfig
-#BuildRequires:  docbook-utils
+# include a file from upstream git, which is missed in tarball
+Source3:        nbd@.service.tmpl
 BuildRequires:  glib2-devel
 BuildRequires:  systemd
 Requires(post): systemd
@@ -20,9 +21,10 @@ remote block devices over a TCP/IP network.
 
 %prep
 %setup -q
+cp %{SOURCE3} systemd
 
 %build
-%configure --enable-syslog --enable-lfs
+%configure --enable-syslog --enable-lfs --enable-gznbd
 %make_build
 
 %install
@@ -43,16 +45,21 @@ make check
 %systemd_postun_with_restart %{S:1}
 
 %files
-%doc README*
+%doc README.md doc/proto.md doc/todo.txt
 %license COPYING
 %{_bindir}/nbd-server
 %{_bindir}/nbd-trdump
+%{_bindir}/gznbd
 %{_mandir}/man*/nbd*
 %{_sbindir}/nbd-client
 %config(noreplace) %{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 
 %changelog
+* Sun Aug 14 2016 Robin Lee <cheeselee@fedoraproject.org> - 3.14-1
+- Update to 3.14 (BZ#1279876)
+- Enable gznbd
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.11-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
