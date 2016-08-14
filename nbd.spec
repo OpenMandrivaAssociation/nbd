@@ -10,6 +10,7 @@ Source2:        nbd-server.sysconfig
 # include a file from upstream git, which is missed in tarball
 Source3:        nbd@.service.tmpl
 BuildRequires:  glib2-devel
+BuildRequires:  zlib-devel
 BuildRequires:  systemd
 Requires(post): systemd
 Requires(preun): systemd
