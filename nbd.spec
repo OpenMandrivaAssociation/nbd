@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        3.14
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
@@ -30,10 +30,14 @@ cp %{SOURCE3} systemd
 
 %install
 %make_install
+install -pDm644 systemd/nbd@.service %{buildroot}%{_unitdir}/nbd@.service
 install -pDm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
 install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 
 %check
+# wait longer for nbd-server to fully start,
+# one second may not be enough on Fedora building infra
+sed -i -e 's/sleep 1/sleep 5/' tests/run/simple_test
 make check
 
 %post
@@ -55,11 +59,16 @@ make check
 %{_sbindir}/nbd-client
 %config(noreplace) %{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
+%{_unitdir}/nbd@.service
 
 %changelog
+* Wed Aug 17 2016 Robin Lee <cheeselee@fedoraproject.org> - 3.14-2
+- Install the nbd@.service systemd unit file (BZ#1367679)
+
 * Sun Aug 14 2016 Robin Lee <cheeselee@fedoraproject.org> - 3.14-1
 - Update to 3.14 (BZ#1279876)
 - Enable gznbd
+- Extend nbd-server waiting time during tests
 
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.11-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
