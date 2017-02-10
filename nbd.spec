@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        3.14
-Release:        2%{dist}
+Release:        3%{dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
@@ -62,6 +62,9 @@ make check
 %{_unitdir}/nbd@.service
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.14-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Wed Aug 17 2016 Robin Lee <cheeselee@fedoraproject.org> - 3.14-2
 - Install the nbd@.service systemd unit file (BZ#1367679)
 
