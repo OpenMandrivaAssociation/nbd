@@ -1,5 +1,5 @@
 Name:           nbd
-Version:        3.15.3
+Version:        3.16.1
 Release:        1%{?dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
@@ -55,11 +55,15 @@ make check
 %{_bindir}/gznbd
 %{_mandir}/man*/nbd*
 %{_sbindir}/nbd-client
+%{_sbindir}/min-nbd-client
 %config(noreplace) %{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 %{_unitdir}/nbd@.service
 
 %changelog
+* Mon May 29 2017 Robin Lee <cheeselee@fedoraproject.org> - 3.16.1-1
+- Update to 3.16.1
+
 * Tue May 23 2017 Robin Lee <cheeselee@fedoraproject.org> - 3.15.3-1
 - Update to 3.15.3
 
