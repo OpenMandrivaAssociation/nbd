@@ -1,6 +1,6 @@
 Name:           nbd
 Version:        3.16.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
@@ -61,6 +61,9 @@ make check
 %{_unitdir}/nbd@.service
 
 %changelog
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.16.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Mon May 29 2017 Robin Lee <cheeselee@fedoraproject.org> - 3.16.1-1
 - Update to 3.16.1
 
