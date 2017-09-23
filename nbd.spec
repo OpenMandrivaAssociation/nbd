@@ -1,6 +1,6 @@
 Name:           nbd
-Version:        3.16.1
-Release:        3%{?dist}
+Version:        3.16.2
+Release:        1%{?dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
@@ -11,9 +11,7 @@ BuildRequires:  glib2-devel >= 2.26
 BuildRequires:  gnutls-devel
 BuildRequires:  zlib-devel
 BuildRequires:  systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
+%{?systemd_requires}
 
 %description
 Tools for the Linux Kernel's network block device, allowing you to use
@@ -29,6 +27,11 @@ remote block devices over a TCP/IP network.
 %install
 %make_install
 install -pDm644 systemd/nbd@.service %{buildroot}%{_unitdir}/nbd@.service
+mkdir -p %{buildroot}%{_unitdir}/nbd@.service.d
+cat > %{buildroot}%{_unitdir}/nbd@.service.d/modprobe.conf <<EOF
+[Service]
+ExecStartPre=/sbin/modprobe nbd
+EOF
 install -pDm644 %{S:1} %{buildroot}%{_unitdir}/nbd-server.service
 install -pDm644 %{S:2} %{buildroot}%{_sysconfdir}/sysconfig/nbd-server
 
@@ -39,13 +42,13 @@ sed -i -e 's/sleep 1/sleep 10/' tests/run/simple_test
 make check
 
 %post
-%systemd_post %{S:1}
+%systemd_post nbd-server.service
 
 %preun
-%systemd_preun %{S:1}
+%systemd_preun nbd-server.service
 
 %postun
-%systemd_postun_with_restart %{S:1}
+%systemd_postun nbd-server.service
 
 %files
 %doc README.md doc/proto.md doc/todo.txt
@@ -59,8 +62,14 @@ make check
 %config(noreplace) %{_sysconfdir}/sysconfig/nbd-server
 %{_unitdir}/nbd-server.service
 %{_unitdir}/nbd@.service
+%{_unitdir}/nbd@.service.d
 
 %changelog
+* Sat Sep 23 2017 Robin Lee <cheeselee@fedoraproject> - 3.16.2-1
+- Update to 3.16.2 (BZ#1490655, BZ#1490039)
+- nbd@.service would automatically modprobe nbd (BZ#1480986)
+- Fix scriptlets
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.16.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
