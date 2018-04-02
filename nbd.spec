@@ -1,6 +1,6 @@
 Name:           nbd
-Version:        3.16.2
-Release:        3%{?dist}
+Version:        3.17
+Release:        1%{?dist}
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
@@ -11,6 +11,7 @@ BuildRequires:  gcc
 BuildRequires:  glib2-devel >= 2.26
 BuildRequires:  gnutls-devel
 BuildRequires:  zlib-devel
+BuildRequires:  libnl3-devel
 BuildRequires:  systemd
 %{?systemd_requires}
 
@@ -66,6 +67,9 @@ make check
 %{_unitdir}/nbd@.service.d
 
 %changelog
+* Mon Apr  2 2018 Robin Lee <cheeselee@fedoraproject.org> - 3.17-1
+- Update to 3.17
+
 * Sat Mar 10 2018 Robin Lee <cheeselee@fedoraproject.org> - 3.16.2-3
 - BR gcc for http://fedoraproject.org/wiki/Changes/Remove_GCC_from_BuildRoot
 
