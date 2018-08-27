@@ -1,5 +1,5 @@
 Name:           nbd
-Version:        3.17
+Version:        3.18
 Release:        1
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
