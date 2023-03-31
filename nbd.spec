@@ -1,6 +1,6 @@
 Name:           nbd
 Version:	3.20
-Release:	2
+Release:	3
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
 URL:            http://nbd.sourceforge.net
