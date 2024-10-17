@@ -3,7 +3,7 @@ Version:	3.20
 Release:	3
 Summary:        Network Block Device user-space tools (TCP version)
 License:        GPLv2
-URL:            http://nbd.sourceforge.net
+URL:            https://nbd.sourceforge.net
 # https://github.com/NetworkBlockDevice/nbd
 Source0:        http://downloads.sourceforge.net/project/nbd/nbd/%{version}/%{name}-%{version}.tar.xz
 Source1:        nbd-server.service
