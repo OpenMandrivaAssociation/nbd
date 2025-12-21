@@ -8,6 +8,11 @@ URL:            https://nbd.sourceforge.net
 Source0:        http://downloads.sourceforge.net/project/nbd/nbd/%{version}/%{name}-%{version}.tar.xz
 Source1:        nbd-server.service
 Source2:        nbd-server.sysconfig
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gnutls)
 BuildRequires:  pkgconfig(zlib)
